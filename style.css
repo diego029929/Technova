@@ -1,18 +1,17 @@
-/* Import police Montserrat */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
-
 /* ---------- VARIABLES GLOBALES ---------- */
 :root {
   --color-primary: #ffd200;
   --color-secondary: #f7971e;
   --color-bg-start: #6a11cb;
   --color-bg-end: #2575fc;
-  --color-light: #fff9d3;
-  --shadow-primary: 0 0 15px var(--color-primary);
+  --color-text: #ffffff;
+  --color-card-bg: rgba(255,255,255,0.1);
   --radius: 15px;
+  --shadow-primary: 0 8px 25px rgba(0,0,0,0.3);
+  --transition: 0.3s ease;
 }
 
-/* ---------- RESET & BASE ---------- */
+/* ---------- RESET ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -21,9 +20,9 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-text);
   background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   background-size: 200% 200%;
-  color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,7 +31,7 @@ body {
   animation: bgPulse 15s ease-in-out infinite;
 }
 
-/* Animation du fond */
+/* ---------- ANIMATION DE FOND ---------- */
 @keyframes bgPulse {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -41,37 +40,128 @@ body {
 /* ---------- HEADER ---------- */
 header {
   width: 100%;
+  max-width: 1200px;
   background: rgba(0,0,0,0.4);
   border-radius: var(--radius);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-primary);
+  padding: 15px 30px;
   margin-bottom: 30px;
-  position: relative;
-  z-index: 1;
 }
 
-nav {
-  max-width: 1200px;
-  margin: auto;
-  padding: 15px 30px;
+nav ul {
   display: flex;
+  gap: 25px;
+  list-style: none;
   justify-content: center;
 }
 
-.nav-list {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.nav-list a {
+nav a {
   text-decoration: none;
-  font-weight: 600;
-  color: #e0e0ff;
+  color: var(--color-text);
+  font-weight: bold;
   padding: 8px 16px;
   border-radius: var(--radius);
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
+nav a:hover,
+nav a.active {
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+  color: black;
+  transform: scale(1.1);
+}
+
+/* ---------- TITRE ---------- */
+h1.technova-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px var(--color-primary);
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+  background: var(--color-card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-primary);
+  backdrop-filter: blur(8px);
+  width: 100%;
+  max-width: 1100px;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* ---------- PRODUITS ---------- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background: rgba(255,255,255,0.15);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255,210,0,0.6);
+}
+
+.product-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+}
+
+.product-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.product-price {
+  margin-bottom: 10px;
+}
+
+.product-link {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+  color: black;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.product-link:hover {
+  background: var(--color-primary);
+  color: black;
+  transform: scale(1.05);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  h1.technova-title { font-size: 2.2rem; }
+  nav ul { flex-direction: column; gap: 10px; }
+  .container { padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
 .nav-list a:hover,
 .nav-list a.active {
   background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
